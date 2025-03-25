@@ -1,0 +1,15 @@
+# Ignore all contents of the data folder
+data/*
+
+# But keep the dataset downloader and usage instructions
+!data/dataset_dl.py
+!data/README.md
+
+# Ignore Python virtual envs
+emotionai-env/
+.env/
+.venv/
+
+# Bytecode
+__pycache__/
+*.pyc
