@@ -71,7 +71,7 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 
 **Confusion Matrix Example:**
 
-<img src="pictures/confusion_matrix.png" alt="FatiguEye demo" width="700">
+<img src="pictures/confusion_matrix.png" alt="ConfusionMatrix" width="700">
 
 ## 🚀 Getting Started
 
@@ -79,6 +79,8 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 
 ```bash
 pip install -r requirements.txt
+```
+---
 
 ### 2. Download dataset from Kaggle
 
@@ -88,10 +90,13 @@ Follow the instructions in the README.md located in the data folder
 
 ```bash
 python src/train.py
+```
+---
 
 ### 4.  Evaluation the performances with a confusion matrix
 
 ```bash
 python src/confusion_matrix.py
+```
 
 
