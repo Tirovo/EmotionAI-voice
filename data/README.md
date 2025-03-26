@@ -9,3 +9,4 @@ Then, in the project root, run:
 
 ```bash
 python data/dataset_dl.py
+```

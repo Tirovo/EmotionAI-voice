@@ -4,7 +4,7 @@ import torch.optim as optim
 from torch.utils.data import DataLoader
 
 from dataset import EmotionDataset
-from cnn_gru import EmotionCNN_GRU
+from cnn import EmotionCNN
 from spec_augment_transform import SpecAugmentTransform
 
 import os
@@ -33,7 +33,7 @@ train_loader = DataLoader(train_set, batch_size=32, shuffle=True)
 val_loader = DataLoader(val_set, batch_size=32)
 
 # 🧠 Modèle
-model = EmotionCNN_GRU().to(device)
+model = EmotionCNN().to(device)
 
 # 🎯 Loss + optimizer
 criterion = nn.CrossEntropyLoss()
@@ -41,7 +41,7 @@ optimizer = optim.Adam(model.parameters(), lr=1e-3)
 scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
 
 # 🏋️‍♂️ Entraînement
-EPOCHS = 75
+EPOCHS = 25
 best_val_acc = 0.0
 
 for epoch in range(EPOCHS):
