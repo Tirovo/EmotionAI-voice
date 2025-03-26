@@ -67,7 +67,6 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 - Training set: Actors 1–20
 - Validation set: Actors 21–24
 
----
 
 **Confusion Matrix Example:**
 
