@@ -2,52 +2,76 @@
 
 > An AI-powered application for detecting human emotions through voice input, designed for healthcare and human-computer interaction enhancement.
 
+---
+
 ## 📌 Overview
 
-**EmotionAI Voice** is an open-source project that leverages Deep Learning and audio signal processing to classify emotions from human speech.  
-This application is designed for use cases in mental health, digital well-being, and intelligent voice interfaces.
+**EmotionAI Voice** is an open-source deep learning project that classifies vocal emotions using raw `.wav` audio.  
+It's designed for applications in mental health monitoring, UX analysis, and intelligent speech interfaces.
 
-It demonstrates how raw vocal input can be processed, analyzed, and used to infer emotional states — using a custom-built deep learning model trained entirely from scratch.
+🔬 The model is trained **from scratch**, using spectrogram-based audio features, and aims to recognize 8 core emotions.
 
 ---
 
 ## 🎯 Features
 
-- 🧠 Emotion recognition (e.g., calm, angry, happy, sad, etc.)
-- 🎧 Upload `.wav` audio files
-- 💬 Real-time prediction display (via Streamlit interface)
-- 🧪 Custom CNN model trained using PyTorch
-- 📁 Lightweight and fully customizable
-- ✅ No pre-trained models used — fully from scratch
+- 🧠 Emotion recognition: `neutral`, `calm`, `happy`, `sad`, `angry`, `fearful`, `disgust`, `surprised`
+- 🎧 Accepts `.wav` audio inputs (from RAVDESS dataset)
+- 📊 CNN and CNN+GRU models implemented in PyTorch
+- 🔍 Real-time evaluation with confusion matrix and accuracy tracking
+- 🛠️ Fully open-source and customizable (no pre-trained models)
+- 🧪 Includes **SpecAugment** for data augmentation (frequency/time masking)
 
 ---
 
-## 📚 Dataset
+## 📚 Dataset — RAVDESS
 
-We use the [**RAVDESS** dataset](https://zenodo.org/record/1188976), which contains labeled speech recordings from 24 actors, expressing 8 different emotions.
+We use the [**RAVDESS** dataset](https://zenodo.org/record/1188976), which includes:
 
-Emotion classes included:
-- Neutral
-- Calm
-- Happy
-- Sad
-- Angry
-- Fearful
-- Disgust
-- Surprised
+- 🎭 24 professional actors (balanced male/female)
+- 🎙️ 1440 `.wav` files (16-bit, 48kHz)
+- 8 labeled emotions:  
+  `neutral`, `calm`, `happy`, `sad`, `angry`, `fearful`, `disgust`, `surprised`
 
-You must download the dataset manually and place the `.wav` files inside the `data/` folder.  
-See `data/README.md` for more instructions.
+Each `.wav` file is preprocessed into a **Mel spectrogram** and stored as `.npy` format.
 
 ---
 
-## 🧠 Model
+## 🧠 Model Architectures
 
-The model used is a **1D Convolutional Neural Network (CNN)** built from scratch with **PyTorch**, trained on **MFCC** features extracted from each audio sample.
+### 2 different models
+#### ✅ CNN (Best Performance)
+- 3x Conv1D + ReLU + MaxPool
+- Fully connected layers
+- Dropout regularization (adjustable)
 
-No pre-trained weights or transfer learning models are used — this project is fully custom and pedagogical.
+#### 🔁 CNN + GRU
+- CNN front-end for spatial encoding
+- GRU (recurrent layers) to capture temporal dynamics
+- Lower accuracy than CNN-only model
 
 ---
+
+### 🧪 SpecAugment: Data Augmentation
+
+To improve generalization, we implemented `SpecAugmentTransform` which applies:
+
+- 🕒 **Time masking**: hides random time intervals
+- 📡 **Frequency masking**: hides random mel frequency bands
+
+---
+
+### 📈 Training Results
+
+- Best Validation Accuracy: **~49.6%**
+- Training set: Actors 1–20
+- Validation set: Actors 21–24
+
+---
+
+**Confusion Matrix Example:**
+
+![Confusion Matrix](./confusion_matrix.png)
 
 ## 🚀 Getting Started
 
@@ -55,3 +79,19 @@ No pre-trained weights or transfer learning models are used — this project is 
 
 ```bash
 pip install -r requirements.txt
+
+### 2. Download dataset from Kaggle
+
+Follow the instructions in the README.md located in the data folder
+
+### 3 . Train the model
+
+```bash
+python src/train.py
+
+### 4.  Evaluation the performances with a confusion matrix
+
+```bash
+python src/confusion_matrix.py
+
+
