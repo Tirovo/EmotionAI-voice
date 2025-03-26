@@ -2,11 +2,11 @@ torch==2.6.0
 torchaudio==2.2.1
 numpy==1.26.4
 pandas==2.2.1
-scikit-learn==1.4.1
+scikit-learn==1.6.1
 matplotlib==3.8.3
 seaborn==0.13.2
 librosa==0.10.1
 soundfile==0.12.1
-tqdm==4.66.2
-streamlit==1.32.2
+tqdm==4.67.1
+streamlit==1.44.0
 kaggle==1.6.6
