@@ -91,7 +91,6 @@ While the model captures general emotion cues, it suffers from class overlap and
 ```bash
 pip install -r requirements.txt
 ```
----
 
 ### 2. Download dataset from Kaggle
 
@@ -102,7 +101,6 @@ Follow the instructions in the README.md located in the data folder
 ```bash
 python src/train.py
 ```
----
 
 ### 4.  Evaluation the performances with a confusion matrix
 
