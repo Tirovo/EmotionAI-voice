@@ -71,7 +71,7 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 
 **Confusion Matrix Example:**
 
-![Confusion Matrix](./confusion_matrix.png)
+<img src="pictures/confusion_matrix.png" alt="FatiguEye demo" width="700">
 
 ## 🚀 Getting Started
 
