@@ -4,7 +4,7 @@ import torch
 from torch.utils.data import Dataset
 from glob import glob
 
-# Mapping émotion ID → label (tu peux adapter)
+# Emotion mapping : ID to LABEL
 emotion_map = {
     "01": "neutral",
     "02": "calm",
@@ -39,11 +39,11 @@ class EmotionDataset(Dataset):
     def __getitem__(self, idx):
         spec = np.load(self.files[idx])
 
-        # Normalisation [0, 1] simple (optionnelle)
+        # Normalization [0, 1]
         if self.normalize:
             spec = (spec + 80) / 80  # car valeurs entre [-80, 0]
 
-        # (1, 128, 128) pour CNN 2D
+        # (1, 128, 128)
         spec = torch.tensor(spec, dtype=torch.float32).unsqueeze(0)
         label = torch.tensor(self.labels[idx], dtype=torch.long)
 
