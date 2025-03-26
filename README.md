@@ -71,7 +71,7 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 
 **Confusion Matrix Example:**
 
-<img src="pictures/confusion_matrix.png" alt="ConfusionMatrix" width="700">
+<img src="figures/confusion_matrix.png" alt="ConfusionMatrix" width="700">
 
 ## 🚀 Getting Started
 
