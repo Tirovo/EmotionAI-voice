@@ -4,12 +4,12 @@ import numpy as np
 npy_dir = "../data/ravdess_npy/Actor_01"
 files = os.listdir(npy_dir)
 
-print(f"🧠 Nombre de fichiers dans Actor_01 : {len(files)}")
-print("🔎 Exemple :", files[:3])
+print(f"Number of file in Actor 1 : {len(files)}")
+print("Test :", files[:3])
 
-# Charger un .npy pour voir
+# Try loading a .npy
 mel = np.load(os.path.join(npy_dir, files[0]))
-print("✅ Shape du spectrogramme :", mel.shape)
+print("Spectrogram shape :", mel.shape)
 
 import matplotlib.pyplot as plt
 
