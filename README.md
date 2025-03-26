@@ -73,6 +73,17 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 
 <img src="figures/confusion_matrix.png" alt="ConfusionMatrix" width="700">
 
+### 🔍 Key Observations:
+- Surprised, calm, and disgust are the most accurately predicted emotions.
+- Neutral, happy, and sad tend to be confused with each other, which is common due to subtle acoustic variations.
+- The model struggles with fearful and angry in some cases — suggesting those may share overlapping vocal characteristics in this dataset.
+- Emotion classes like happy and fearful are often misclassified due to variability in expression intensity among different actors.
+
+##### 📈 Interpretation
+While the model captures general emotion cues, it suffers from class overlap and limited generalization. The accuracy remains significantly above random (12.5% for 8 classes), but there is still room for improvement.
+
+---
+
 ## 🚀 Getting Started
 
 ### 1. Install dependencies
