@@ -5,7 +5,7 @@
 ---
 
 ## 🚀 Overview
-![Main Preview](figures/main.png)
+![Main Preview](assets/img/main.png)
 
 
 **EmotionAI Voice** is an open-source deep learning project that classifies vocal emotions using raw `.wav` audio.  
