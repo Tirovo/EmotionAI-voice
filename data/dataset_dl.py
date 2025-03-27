@@ -4,7 +4,7 @@ import numpy as np
 from glob import glob
 from tqdm import tqdm
 
-# Répertoire actuel
+# Current Dir
 this_dir = os.path.abspath(os.path.dirname(__file__))
 os.environ["KAGGLE_CONFIG_DIR"] = this_dir
 
@@ -40,9 +40,9 @@ for root, dirs, _ in os.walk(this_dir):
         break
 
 if not found:
-    raise FileNotFoundError("Dossier 'audio_speech_actors_01-24' non trouvé après extraction.")
+    raise FileNotFoundError("Dossier 'audio_speech_actors_01-24' not found.")
 
-print("Fichiers audio trouvés dans :", wav_root)
+print("Audio files found in :", wav_root)
 
 # === PREPARE OUTPUT DIRECTORY ===
 npy_root = os.path.join(this_dir, "ravdess_npy_fixed")
@@ -54,7 +54,7 @@ N_MELS = 128
 HOP_LENGTH = 512
 TARGET_SHAPE = (128, 128)
 
-# === FONCTION DE REDIMENSIONNEMENT ===
+# === RESHAPING ===
 def resize_spectrogram(spec, target_shape):
     h, w = spec.shape
     th, tw = target_shape
@@ -86,12 +86,12 @@ for actor in tqdm(actor_folders, desc="🎧 Processing and resizing .wav files")
             mel_fixed = resize_spectrogram(mel_db, TARGET_SHAPE)
             np.save(npy_file_path, mel_fixed)
         except Exception as e:
-            print(f"❗ Error processing {wav_file}: {e}")
+            print(f" Error processing {wav_file}: {e}")
 
-print(f"\nTous les fichiers .wav ont été convertis et redimensionnés à {TARGET_SHAPE} dans '{npy_root}'")
+print(f"\nAll .wav files have been converted and reshaped : {TARGET_SHAPE} in '{npy_root}'")
 
-# === SUPPRESSION DES DOSSIERS ACTOR_XX REDONDANTS ===
-print("\nSuppression des dossiers Actor_XX hors de 'audio_speech_actors_01-24'...")
+# === DELETING REDUNDANTS FOLDERS ===
+print("\nDeletion of Actor_XX folders outside of 'audio_speech_actors_01-24'...")
 deleted = 0
 
 for item in os.listdir(this_dir):
@@ -101,11 +101,11 @@ for item in os.listdir(this_dir):
             import shutil
             shutil.rmtree(item_path)
             deleted += 1
-            print(f"Supprimé : {item}")
+            print(f"Deleted : {item}")
         except Exception as e:
-            print(f"Erreur lors de la suppression de {item}: {e}")
+            print(f"An error has occured during the deletion of {item}: {e}")
 
 if deleted == 0:
-    print("Aucun dossier 'Actor_XX' à supprimer.")
+    print("No folder 'Actor_XX' left to delete.")
 else:
-    print(f"{deleted} dossier(s) 'Actor_XX' supprimé(s).")
+    print(f"{deleted} folders 'Actor_XX' deleted.")

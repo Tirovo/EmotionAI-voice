@@ -4,7 +4,8 @@
 
 ---
 
-## 📌 Overview
+## 🚀 Overview
+![Main Preview](assets/img/main.png)
 
 **EmotionAI Voice** is an open-source deep learning project that classifies vocal emotions using raw `.wav` audio.  
 It's designed for applications in mental health monitoring, UX analysis, and intelligent speech interfaces.
@@ -67,11 +68,21 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 - Training set: Actors 1–20
 - Validation set: Actors 21–24
 
----
 
 **Confusion Matrix Example:**
 
-<img src="pictures/confusion_matrix.png" alt="ConfusionMatrix" width="700">
+<img src="figures/confusion_matrix.png" alt="ConfusionMatrix" width="700">
+
+### 🔍 Key Observations:
+- Surprised, calm, and disgust are the most accurately predicted emotions.
+- Neutral, happy, and sad tend to be confused with each other, which is common due to subtle acoustic variations.
+- The model struggles with fearful and angry in some cases — suggesting those may share overlapping vocal characteristics in this dataset.
+- Emotion classes like happy and fearful are often misclassified due to variability in expression intensity among different actors.
+
+##### 📈 Interpretation
+While the model captures general emotion cues, it suffers from class overlap and limited generalization. The accuracy remains significantly above random (12.5% for 8 classes), but there is still room for improvement.
+
+---
 
 ## 🚀 Getting Started
 
@@ -80,7 +91,6 @@ To improve generalization, we implemented `SpecAugmentTransform` which applies:
 ```bash
 pip install -r requirements.txt
 ```
----
 
 ### 2. Download dataset from Kaggle
 
@@ -91,7 +101,6 @@ Follow the instructions in the README.md located in the data folder
 ```bash
 python src/train.py
 ```
----
 
 ### 4.  Evaluation the performances with a confusion matrix
 

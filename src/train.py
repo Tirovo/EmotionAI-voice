@@ -9,18 +9,19 @@ from spec_augment_transform import SpecAugmentTransform
 
 import os
 
-# 💡 Utilise le GPU s'il est dispo
+# Use your GPU if it's available
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-# 📁 Chemins
+# PATHS
 data_path = "../data/ravdess_npy_fixed"
 save_path = "../models/emotion_cnn.pt"
 os.makedirs(os.path.dirname(save_path), exist_ok=True)
 
-# 📦 Chargement des données
+# Data Loading
 train_actors = list(range(1, 21))
 val_actors = list(range(21, 25))
 
+# Training set creation with data augmentation included : improves generalization, reduces overfitting, makes the model rore robust to variations in intonation, speaking rate, and background noise overall.
 train_set = EmotionDataset(
     data_path,
     actors=train_actors,
@@ -32,13 +33,13 @@ val_set = EmotionDataset(data_path, actors=val_actors)
 train_loader = DataLoader(train_set, batch_size=32, shuffle=True)
 val_loader = DataLoader(val_set, batch_size=32)
 
-# 🧠 Modèle
+# Model
 model = EmotionCNN().to(device)
 
-# 🎯 Loss + optimizer
-criterion = nn.CrossEntropyLoss()
-optimizer = optim.Adam(model.parameters(), lr=1e-3)
-scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5)
+# Loss + optimizer
+lossFunction = nn.CrossEntropyLoss() # Loss: measures how far predictions are from true emotion labels
+optimizer = optim.Adam(model.parameters(), lr=1e-3) # Optimizer : updates CNN weights efficiently using adaptive gradients
+scheduler = optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.5) # Scheduler: reduces learning rate over time to refine training stability
 
 # 🏋️‍♂️ Entraînement
 EPOCHS = 25
@@ -53,7 +54,7 @@ for epoch in range(EPOCHS):
 
         optimizer.zero_grad()
         outputs = model(x)
-        loss = criterion(outputs, y)
+        loss = lossFunction(outputs, y)
         loss.backward()
         optimizer.step()
 
@@ -65,7 +66,7 @@ for epoch in range(EPOCHS):
     train_acc = correct / total
     train_loss /= total
 
-    # 🔎 Validation
+    # Validation
     model.eval()
     val_loss, val_correct, val_total = 0.0, 0, 0
 
@@ -87,7 +88,7 @@ for epoch in range(EPOCHS):
           f"Train Loss: {train_loss:.4f} Acc: {train_acc:.4f} | "
           f"Val Loss: {val_loss:.4f} Acc: {val_acc:.4f}")
 
-    # 💾 Sauvegarde du meilleur modèle
+    # Save the best model
     if val_acc > best_val_acc:
         best_val_acc = val_acc
         torch.save(model.state_dict(), save_path)
