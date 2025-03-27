@@ -3,7 +3,6 @@
 > An AI-powered application for detecting human emotions through voice input, designed for healthcare and human-computer interaction enhancement.
 
 ---
-
 ## 🚀 Overview
 ![Main Preview](assets/img/main.png)
 
